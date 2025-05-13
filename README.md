@@ -24,7 +24,7 @@ Este proyecto implementa una API RESTful desarrollada con **Spring Boot**, cuyo 
 
 ## 🗂 Estructura del proyecto
 
-```plaintext
+```
 src/
 ├── main/
 │   ├── java/com/example/productsimilarity/
@@ -51,21 +51,15 @@ src/
 
 Desde la raíz del proyecto:
 
-```bash
-./mvnw spring-boot:run
-```
+`./mvnw spring-boot:run`
 
 La aplicación estará disponible en:
 
-```
-http://localhost:5000
-```
+`http://localhost:5000`
 
 Ejemplo:
 
-```
-curl http://localhost:5000/product/1/similar
-```
+`curl http://localhost:5000/product/1/similar`
 
 ---
 
@@ -88,15 +82,11 @@ curl http://localhost:5000/product/1/similar
 
 Generar un `.jar` con:
 
-```
-./mvnw clean package
-```
+`./mvnw clean package`
 
 Lanzarlo con:
 
-```
-java -jar target/product-similarity-0.0.1-SNAPSHOT.jar
-```
+`java -jar target/product-similarity-0.0.1-SNAPSHOT.jar`
 
 ---
 

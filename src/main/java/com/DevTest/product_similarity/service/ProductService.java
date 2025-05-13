@@ -24,15 +24,15 @@ public class ProductService {
     }
 
     @Async
-    public CompletableFuture<Product> fetchProductById(String id) {
-        try {
-            Product product = restTemplate.getForObject("http://localhost:3001/product/" + id, Product.class);
-            return CompletableFuture.completedFuture(product);
-        } catch (Exception e) {
-            logger.warn("Failed async fetch for product {}: {}", id, e.getMessage());
-            return CompletableFuture.completedFuture(null);
-        }
+public CompletableFuture<Product> fetchProductById(String id) {
+    try {
+        Product product = restTemplate.getForObject("http://localhost:3001/product/" + id, Product.class);
+        return CompletableFuture.completedFuture(product);
+    } catch (Exception e) {
+        logger.warn("Failed async fetch for product {}: {}", id, e.getMessage());
+        return CompletableFuture.completedFuture(null);
     }
+}
 
     private final RestTemplate restTemplate;
 
