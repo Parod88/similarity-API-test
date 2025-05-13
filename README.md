@@ -25,15 +25,16 @@ Este proyecto implementa una API RESTful desarrollada con **Spring Boot**, cuyo 
 ## 🗂 Estructura del proyecto
 
 ```
-src/
-├── main/
-│   ├── java/com/example/productsimilarity/
-│   │   ├── ProductSimilarityApplication.java
-│   │   ├── controller/ProductController.java
-│   │   ├── model/Product.java
-│   │   └── service/ProductService.java
-│   └── resources/
-│       └── application.properties
+spring-boot/
+├──src/
+    ├── main/
+    │   ├── java/com/example/productsimilarity/
+    │   │   ├── ProductSimilarityApplication.java
+    │   │   ├── controller/ProductController.java
+    │   │   ├── model/Product.java
+    │   │   └── service/ProductService.java
+    │   └── resources/
+    │       └── application.properties
 ```
 
 ---
@@ -47,11 +48,22 @@ src/
 - Maven (`./mvnw` incluido en el proyecto)
 - IDE recomendado: IntelliJ IDEA o VSCode
 
-### 2. Levantar la aplicación
+### 2. Iniciar mocks y métricas
 
-Desde la raíz del proyecto:
+Desde la raiz del proyecto:
+`cd testing`
+`docker-compose up -d simulado influxdb grafana`
 
-`./mvnw spring-boot:run`
+Verificar que el mock funcione:
+
+`curl http://localhost:3001/product/1/similarids`
+
+### 3. Levantar la aplicación
+
+Desde la raiz del proyecto:
+`cd spring-boot`
+
+`./mvnw spring-boot:run` o si ya tienes instalado maven `mvn spring-boot:run`
 
 La aplicación estará disponible en:
 
@@ -60,6 +72,31 @@ La aplicación estará disponible en:
 Ejemplo:
 
 `curl http://localhost:5000/product/1/similar`
+
+---
+
+## 🧪 Ejecutar tests automáticos
+
+Con los mocks corriendo, ejecuta:
+
+`cd testing`
+`docker-compose run --rm k6 run scripts/test.js`
+
+---
+
+## 📊 Ver resultados en Grafana
+
+Accede a:
+
+`http://localhost:3000/d/Le2Ku9NMk/k6-performance-test`
+
+---
+
+## 🛡️ Manejo de errores
+
+- Si falla el llamado a `/similarids`, se devuelve una lista vacía.
+- Si falla algún producto individual, se omite pero el resto se incluye.
+- Los errores se registran en consola para trazabilidad.
 
 ---
 
